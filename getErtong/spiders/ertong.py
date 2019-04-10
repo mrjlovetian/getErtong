@@ -20,6 +20,7 @@ class ErtongSpider(scrapy.Spider):
 
         self.index += 1
         url = self.startUrl + str(self.index) + '.html'
+        print('xxxxxxxxxxxxxxxxxxxxx', url)
         yield scrapy.Request(url, callback=self.parse)
     
     def parseDetail(self, response):
@@ -29,6 +30,5 @@ class ErtongSpider(scrapy.Spider):
         detailcontent = response.xpath("//div[@class='detail-box']/p/text()").extract()[0]
         # detailcontent = detailcontent.replace('\n', '').replace('\\r', ''), replace('\r', '')
         item['detailcontent'] = detailcontent
-        print('xxxxxxxxxxxxxxxxxxxxx', detailcontent)
         yield item
 

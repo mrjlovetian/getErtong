@@ -10,6 +10,7 @@ class ErtongSpider(scrapy.Spider):
     start_urls = [startUrl + str(index) + '.html']
 
     def parse(self, response):
+        self.index += 1
         for each in response.xpath("//ul[@class='list-conBox-ul']/li"):
             item = GetertongItem()
             item['title'] = each.xpath("./div[@class='right']/a/text()").extract()[0]
@@ -17,18 +18,17 @@ class ErtongSpider(scrapy.Spider):
             item['detailUrl'] = each.xpath("./div[@class='right']/a/@href").extract()[0] 
             item['imageUrl'] = each.xpath("./a/img/@src").extract()[0] 
             yield scrapy.Request(item['detailUrl'], callback = self.parseDetail, meta={'item':item})
-
-        self.index += 1
+            
         url = self.startUrl + str(self.index) + '.html'
-        print('xxxxxxxxxxxxxxxxxxxxx', url)
         yield scrapy.Request(url, callback=self.parse)
     
     def parseDetail(self, response):
         item = response.meta["item"]
-        # print('xxxxxxxxxxxxxxxxxxxxx', item['title'])
-        # print('.....................', response.xpath("//div[@class='detail-box']/p/text()").extract()[0])
-        detailcontent = response.xpath("//div[@class='detail-box']/p/text()").extract()[0]
-        # detailcontent = detailcontent.replace('\n', '').replace('\\r', ''), replace('\r', '')
+        detailcontent = ''
+        i = 0
+        for each in response.xpath("//div[@class='detail-box']/p/text()"):
+            detailcontent = detailcontent + each.extract()[i]
+            i += 1
         item['detailcontent'] = detailcontent
         yield item
 

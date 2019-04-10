@@ -28,7 +28,7 @@ class ErtongSpider(scrapy.Spider):
         # print('.....................', response.xpath("//div[@class='detail-box']/p/text()").extract()[0])
         detailcontent = response.xpath("//div[@class='detail-box']/p/text()").extract()[0]
         # detailcontent = detailcontent.replace('\n', '').replace('\\r', ''), replace('\r', '')
-        # item['detailcontent'] = detailcontent.strip()
-        print('xxxxxxxxxxxxxxxxxxxxx', detailcontent.strip())
+        item['detailcontent'] = detailcontent
+        print('xxxxxxxxxxxxxxxxxxxxx', detailcontent)
         yield item
 

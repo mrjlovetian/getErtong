@@ -24,8 +24,8 @@ class ErtongSpider(scrapy.Spider):
     
     def parseDetail(self, response):
         item = response.meta["item"]
-        print('xxxxxxxxxxxxxxxxxxxxx', item['title'])
-        print('.....................', response.xpath("//div[@class='detail-box']/p/text()").extract()[0])
+        # print('xxxxxxxxxxxxxxxxxxxxx', item['title'])
+        # print('.....................', response.xpath("//div[@class='detail-box']/p/text()").extract()[0])
         item['detailcontent'] = response.xpath("//div[@class='detail-box']/p/text()").extract()[0]
         yield item
 

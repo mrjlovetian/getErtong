@@ -18,6 +18,9 @@ class ErtongSpider(scrapy.Spider):
             item['imageUrl'] = each.xpath("./a/img/@src").extract()[0] 
             yield scrapy.Request(item['detailUrl'], callback = self.parseDetail, meta={'item':item})
 
+        self.index += 1
+        url = self.startUrl + str(self.index) + '.html'
+        yield scrapy.Request(url, callback=self.parse)
     
     def parseDetail(self, response):
         item = response.meta["item"]

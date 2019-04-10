@@ -15,7 +15,7 @@ class GetertongPipeline(object):
         detailUrl = pymysql.escape_string(item['detailUrl'])
         content = pymysql.escape_string(item['content'])
         imageUrl = pymysql.escape_string(item['imageUrl'])
-        detailcontent = pymysql.escape_string(item['detailcontent'])
+        detailcontent = (item['detailcontent'])
         sql = '''INSERT INTO ertong VALUES ('%s', '%s', '%s', '%s, '%s)'''%(title, detailUrl, content, imageUrl, detailcontent)
         cursor.execute(sql)
         db.commit()

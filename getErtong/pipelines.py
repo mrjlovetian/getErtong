@@ -16,7 +16,7 @@ class GetertongPipeline(object):
         content = pymysql.escape_string(item['content'])
         imageUrl = pymysql.escape_string(item['imageUrl'])
         detailcontent = pymysql.escape_string(item['detailcontent'])
-        sql = '''INSERT INTO ertong VALUES ('%s', '%s', '%s', '%s, '%s)'''%(title, detailUrl, content, imageUrl, detailcontent)
+        sql = '''INSERT INTO ertong VALUES ('%s', '%s', '%s', '%s', '%s')'''%(title, detailUrl, content, imageUrl, detailcontent)
         print('vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv', sql)
         cursor.execute(sql)
         db.commit()
